@@ -13,5 +13,19 @@ export default makeStyles((theme) => ({
     list: {
         maxHeight: '150px',
         overflow: 'auto',
+        '&::-webkit-scrollbar': {
+            width: "6px"
+        },
+
+        '&::-webkit-scrollbar-track': {
+            background: '#D7F6F8'
+        },
+
+        '&::-webkit-scrollbar-thumb': {
+            background: 'linear-gradient(#36d1dc, #5b86e5)',
+            borderRadius: "6px"
+            // outline: '1px solid slategrey'
+        }
     },
+
 }));

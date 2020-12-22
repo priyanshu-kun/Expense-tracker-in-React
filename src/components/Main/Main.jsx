@@ -41,6 +41,7 @@ function Main() {
             lineHeight: '1.5rem',
             marginTop: '20px',
             textAlign: 'center',
+            opacity: "0.6"
           }}
         >
           {/* for speechly */}

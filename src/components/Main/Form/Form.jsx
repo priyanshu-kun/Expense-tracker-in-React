@@ -44,7 +44,7 @@ function Form() {
       <Grid item xs={6}>
         <TextField type="date" label="date" fullWidth />
       </Grid>
-      <Button className={classes.button} style={{border: "1px solid #000"}} color="primary" fullWidth>
+      <Button className={classes.button} color="primary" fullWidth>
         Create
       </Button>
     </Grid>

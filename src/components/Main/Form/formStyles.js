@@ -8,5 +8,12 @@ export default makeStyles(() => ({
     },
     button: {
         marginTop: '20px',
-    },
+        background: "linear-gradient(to left,#36d1dc, #5b86e5)",
+        boxShadow: "3px 5px 15px rgba(0,0,0,0.3)",
+        color: "#fff",
+        transition: "all 0.3s ease",
+        '&:hover': {
+            opacity: "0.8"
+        }
+    }
 }));
