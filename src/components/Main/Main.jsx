@@ -51,7 +51,7 @@ function Main() {
           {/* for speechly */}
           <InfoCard/>
         </Typography>
-        <Divider />
+        <Divider className={classes.divider} />
         {/* form */}
         <Form />
       </CardContent>
