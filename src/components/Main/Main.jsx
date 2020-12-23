@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Card,
   CardHeader,
@@ -10,9 +10,12 @@ import {
 import Form from './Form/Form';
 import useStyles from './mainStyles';
 import List from './List/List';
+import { ExpenseTrackerContext } from '../../context/state.context';
+import InfoCard from "../InfoCard";
 
 function Main() {
   const classes = useStyles();
+  const { Balance } = useContext(ExpenseTrackerContext);
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -34,7 +37,7 @@ function Main() {
           align="center"
           variant="h5"
         >
-          Total Balance $100
+          Total Balance ${Balance}
         </Typography>
         <Typography
           variant="subtitle1"
@@ -46,7 +49,7 @@ function Main() {
           }}
         >
           {/* for speechly */}
-          Try Saying: Add income for $100 in Category Salery for Monday...
+          <InfoCard/>
         </Typography>
         <Divider />
         {/* form */}

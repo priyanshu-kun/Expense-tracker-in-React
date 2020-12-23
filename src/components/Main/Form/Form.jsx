@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { ExpenseTrackerContext } from '../../../context/state.context';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -17,6 +17,8 @@ import {
   expenseCategories,
 } from '../../../constants/categories';
 import formatDate from '../../../utils/formatDate';
+import { useSpeechContext } from '@speechly/react-client';
+import CustomizeSnackbar from '../../Snackbar/Snackbar';
 
 const initialFormState = {
   amount: '',
@@ -29,12 +31,20 @@ function Form() {
   const classes = useStyles();
   const [initialState, setInitialState] = useState(initialFormState);
   const { addTransaction } = useContext(ExpenseTrackerContext);
+  const { segment } = useSpeechContext();
+  const [open, setOpen] = useState(false);
 
   const selectedCategories =
     initialState.type === 'Income' ? incomeCategories : expenseCategories;
 
   const handleCreateButtonClick = () => {
+    if (
+      Number.isNaN(Number(initialState.amount)) ||
+      !initialState.date.includes('-')
+    )
+      return;
     // alert('Create transaction');
+    setOpen(true);
     const transaction = {
       ...initialState,
       amount: Number(initialState.amount),
@@ -44,11 +54,66 @@ function Form() {
     setInitialState(initialFormState);
   };
 
+  useEffect(() => {
+    if (segment) {
+      if (segment.intent.intent === 'add_expense') {
+        setInitialState({ ...initialState, type: 'Expense' });
+      } else if (segment.intent.intent === 'add_income') {
+        setInitialState({ ...initialState, type: 'Income' });
+      } else if (
+        segment.isFinal &&
+        segment.intent.intent === 'create_transaction'
+      ) {
+        return handleCreateButtonClick();
+      } else if (
+        segment.isFinal &&
+        segment.intent.intent === 'cancel_transaction'
+      ) {
+        return setInitialState(initialFormState);
+      }
+
+      segment.entities.forEach((e) => {
+        const category = `${e.value.charAt(0)}${e.value
+          .slice(1)
+          .toLowerCase()}`;
+        switch (e.type) {
+          case 'amount':
+            setInitialState({ ...initialState, amount: e.value });
+            break;
+          case 'category':
+            if (incomeCategories.map((iC) => iC.type).includes(category)) {
+              setInitialState({ ...initialState, type: 'Income', category });
+            } else if (
+              expenseCategories.map((iC) => iC.type).includes(category)
+            ) {
+              setInitialState({ ...initialState, type: 'Expense', category });
+            }
+            break;
+          case 'date':
+            setInitialState({ ...initialState, date: e.value });
+            break;
+          default:
+            break;
+        }
+      });
+
+      if (
+        segment.isFinal &&
+        initialState.amount &&
+        initialState.category &&
+        initialState.type
+      ) {
+        handleCreateButtonClick();
+      }
+    }
+  }, [segment]);
+
   return (
     <Grid container spacing={2}>
+      <CustomizeSnackbar open={open} setOpen={setOpen} />
       <Grid item xs={12}>
         <Typography align="center" variant="subtitle2" gutterBottom>
-          ...
+          {segment && <>{segment.words.map((w) => w.value).join(' ')}</>}
         </Typography>
       </Grid>
       <Grid item xs={6}>

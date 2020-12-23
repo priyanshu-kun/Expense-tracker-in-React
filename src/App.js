@@ -3,6 +3,7 @@ import { Grid } from "@material-ui/core";
 import Details from "./components/Details/Details";
 import Main from "./components/Main/Main";
 import useStyles from "./appStyles";
+import { PushToTalkButton, PushToTalkButtonContainer, ErrorPanel } from "@speechly/react-ui"
 
 function App() {
     const classes = useStyles();
@@ -19,6 +20,12 @@ function App() {
                     <Details title="Expense" />
                 </Grid>
             </Grid>
+            <div style={{ transform: "scale(0.7)" }}>
+                <PushToTalkButtonContainer >
+                    <PushToTalkButton />
+                    <ErrorPanel />
+                </PushToTalkButtonContainer>
+            </div>
         </div>
     )
 }

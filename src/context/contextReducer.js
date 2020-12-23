@@ -8,10 +8,12 @@ export default function ContextReducer(state, action) {
             transactions = state.filter((t) => {
                 return t.id !== action.payload
             })
+            localStorage.setItem("transactions", JSON.stringify(transactions))
             return transactions;
         case 'ADD_TRANSACTION':
             // alert("Add");
             transactions = [action.payload, ...state];
+            localStorage.setItem("transactions", JSON.stringify(transactions))
             return transactions;
         default:
             return state;
