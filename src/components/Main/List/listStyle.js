@@ -22,8 +22,9 @@ export default makeStyles((theme) => ({
         },
 
         '&::-webkit-scrollbar-thumb': {
-            background: 'linear-gradient(#36d1dc, #5b86e5)',
-            borderRadius: "6px"
+            background: 'rgb(91, 134, 229,0.6)'
+            // background: 'rgb(0, 0, 0,0.1)'
+            // borderRadius: "6px"
             // outline: '1px solid slategrey'
         }
     },

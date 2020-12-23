@@ -15,51 +15,8 @@ import useStyles from './listStyle';
 
 function List() {
   const classes = useStyles();
-  const GlobalState = useContext(ExpenseTrackerContext);
-  const transactions = [
-    {
-      id: 1,
-      type: 'Income',
-      category: 'Business',
-      amount: 100,
-      date: `Tue Dec 22 2020 16:44:49`,
-    },
-    {
-      id: 2,
-      type: 'Expense',
-      category: 'Salery',
-      amount: 100,
-      date: `Tue Dec 22 2020 16:44:49`,
-    },
-    {
-      id: 3,
-      type: 'Expense',
-      category: 'Business',
-      amount: 100,
-      date: `Tue Dec 22 2020 16:44:49`,
-    },
-    {
-      id: 4,
-      type: 'Income',
-      category: 'Business',
-      amount: 100,
-      date: `Tue Dec 22 2020 16:44:49`,
-    },
-    {
-      id: 5,
-      type: 'Expense',
-      category: 'Business',
-      amount: 100,
-      date: `Tue Dec 22 2020 16:44:49`,
-    },
-    {
-      id: 6,
-      type: 'Income',
-      category: 'Business',
-      amount: 100,
-      date: `Tue Dec 22 2020 16:44:49`,
-    },
-  ];
+  const { deleteTransaction, transactions } = useContext(ExpenseTrackerContext);
+
   return (
     <MUIList dense={false} className={classes.list}>
       {transactions.map((trans) => (
@@ -85,7 +42,7 @@ function List() {
                 edge="end"
                 area-label="delete"
                 onClick={() => {
-                  alert('Delete');
+                  deleteTransaction(trans.id);
                 }}
               >
                 <Delete />

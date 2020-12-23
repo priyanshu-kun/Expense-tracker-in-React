@@ -29,6 +29,7 @@ function Main() {
             padding: '5px 10px',
             borderRadius: '5px',
             background: ' rgba(54, 209, 220,0.2)',
+            opacity: '0.8',
           }}
           align="center"
           variant="h5"
@@ -41,7 +42,7 @@ function Main() {
             lineHeight: '1.5rem',
             marginTop: '20px',
             textAlign: 'center',
-            opacity: "0.6"
+            opacity: '0.6',
           }}
         >
           {/* for speechly */}

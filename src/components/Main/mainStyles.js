@@ -5,7 +5,8 @@ export default makeStyles((theme) => ({
     root: {
         margin: "0 20px",
         // boxShadow: "none",
-        // border: "1px solid red"
+        // borderTop: "10px solid #000000",
+        // borderBottom: "10px solid #000000",
         boxShadow: "10px 15px 20px rgba(0,0,0,0.23)",
         borderRadius: "20px",
 
