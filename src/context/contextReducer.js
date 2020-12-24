@@ -1,5 +1,3 @@
-import transitions from "@material-ui/core/styles/transitions";
-
 export default function ContextReducer(state, action) {
     let transactions;
     switch (action.type) {
